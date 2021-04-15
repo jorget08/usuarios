@@ -31,23 +31,20 @@ SECRET_KEY = get_secret('SECRET_KEY')
 
 # Application definition
 
-DJANGO_APPS = [
+DJANGO_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+)
 
-LOCAL_APPS = [
+LOCAL_APPS = (
+    'users',
+)
 
-]
-
-THIRD_PARTY_APPS = [
-
-]
-
+THIRD_PARTY_APPS = ()
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -101,6 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+"""Con esto le estamos diciendo que cuando se trate de usuarios vamos a trabajar con el modelo que yo puse y no con 
+el que django trae por defecto"""
+AUTH_USER_MODEL = 'users.User' #Va nombre de la app y nombre del modelo
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -114,3 +114,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#Esto lo ponemos para cambiar la direccion que tiene por defecto la vista LoginView
+#despues de darle enter, para que vaya a donde queremos.
+LOGIN_REDIRECT_URL = '/home'
+
+#Lo ponemos para defenir a donde va a envia cuando se termina de hacer logout, para 
+#cambial la que esta por defecto en LogoutView
+LOGOUT_REDIRECT_URL = '/login'
